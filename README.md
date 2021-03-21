@@ -16,4 +16,9 @@
 # Pour tester
 1. La page localhost:9000 => Home page
 2. La page localhost:9000 => établir 2 fois de tcp
-3. La page localhost:9000/connections => afficher les connexions de tcp établies. 
+3. La page localhost:9000/connections => afficher les connexions de tcp établies et pas finies. 
+
+# PS
+Pour faciliter le test, je l'ai posé une limite sur les connexion.
+Meme si le nombre de limite est à 50, il va toujours le dépasser mais la durée d'attente s'augmente visiblement.
+Si vous avez besoin de limiter le nombre, il faut modifier la configuration de linux.
