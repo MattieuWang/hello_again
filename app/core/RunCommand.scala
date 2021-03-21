@@ -5,7 +5,7 @@ import java.io.{BufferedReader, IOException, InputStreamReader}
 object RunCommand {
   def runTest(): List[String] = {
     val processBuilder = new ProcessBuilder()
-    processBuilder.command("cmd.exe", "/c", "ping -n 3 google.com")
+    processBuilder.command("bash", "-c", "netstat -ant | grep 9000 | grep ESTABLISHED")
     var lines: List[String] = Nil
     try {
       val process = processBuilder.start()
@@ -16,7 +16,7 @@ object RunCommand {
       }
 
       val exitCode = process.waitFor()
-      println(lines)
+      // println(lines)
       println("\nExited with error code : " + exitCode)
       lines
     } catch {

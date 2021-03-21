@@ -20,9 +20,13 @@ class HomeController @Inject()(
     Ok(views.html.index())
   }
 
-  def test() = Action { implicit request: Request[AnyContent] =>
+  def connections() = Action { implicit request: Request[AnyContent] =>
     val lines = RunCommand.runTest()
     Ok(Json.toJson(lines))
+  }
+
+  def home() = Action { implicit request: Request[AnyContent] =>
+    Ok("This is a home page with nothing :)")
   }
 
 }
