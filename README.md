@@ -23,11 +23,11 @@ Pour faciliter le test, je l'ai posé une limite sur les connexion.
 Meme si le nombre de limite est à 50, il va toujours le dépasser mais la durée d'attente s'augmente visiblement.
 Si vous avez besoin de limiter le nombre, il faut modifier la configuration de linux.
 
-# PS 26/03/2021
+# MAJ 26/03/2021
 Le script /test_scripts/syn_flood.py est pour l'attaque de tcp syn flood.
 Pour la réaliser, il faut :
   * Installez scapy.py
-  * Arrêter la configuration: sudo sysctl net.ipv4.tcp_syncookies=0
+  * Arrêtez la configuration: sudo sysctl net.ipv4.tcp_syncookies=0
   * Changez l'addresse IP dans le script
 
 Je recommande d'utiliser hping3 pour réaliser l'attaque de http flood en commande:
@@ -35,3 +35,15 @@ Je recommande d'utiliser hping3 pour réaliser l'attaque de http flood en comman
 hping3 -S --rand-source --flood -p 9000 IP_ADDR
 ```
 Car il peut générer les connexions avec les addresse IP aléatoires.
+
+# MAJ 04/04/2021
+Il faut rajouter l'address ip de vm dans le filtre pour mieux stimuler les attaques venant de pc.
+conf/application.conf:
+```
+play.filters {
+	hosts {
+		allowed = ["local.test.com:9000", "192.168.106.3:9000", "localhost:9000"]
+	}
+}
+```
+
