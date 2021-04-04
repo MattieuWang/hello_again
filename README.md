@@ -38,8 +38,8 @@ Car il peut générer les connexions avec les addresse IP aléatoires.
 
 # MAJ 04/04/2021
 Il faut rajouter l'address ip de vm dans le filtre pour mieux stimuler les attaques venant de pc.
-conf/application.conf:
 ```
+# conf/application.conf:
 play.filters {
 	hosts {
 		allowed = ["local.test.com:9000", "192.168.106.3:9000", "localhost:9000"]
