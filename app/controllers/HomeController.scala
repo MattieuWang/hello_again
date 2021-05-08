@@ -26,6 +26,7 @@ class HomeController @Inject()(
   }
 
   def home() = Action { implicit request: Request[AnyContent] =>
+    println(request.headers.toSimpleMap)
     Ok("This is a home page with nothing :)")
   }
 
