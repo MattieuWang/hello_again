@@ -47,3 +47,22 @@ play.filters {
 }
 ```
 
+# MAJ 08/05/2021
+
+## La Blacklist d'addresse IP dynamique
+* les composantes:
+	* le proxy reverse: nginx + Luajit => Openresty
+	* la base de données: mysql
+
+* la base de données:
+* deux tableaux:
+	* ip_lists: comprend les addr ip qui a envoyé des requêtes au nginx et compte ses fois
+	* blacklist: comprend les addr ip interdites qui sont rajoutées par le système ou par main
+* programmation: 
+	* une procédure pour rajouter les addr ip qui ont dépassé le seuil à la blacklist
+	* un évènement pour vider la blacklist chaque 10 mins, seulement les addr rajoutées par le système (is_manual = 0)
+	* un évènement pour vider ip_list chaque minute
+
+
+
+
