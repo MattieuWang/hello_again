@@ -64,5 +64,10 @@ play.filters {
 	* un évènement pour vider ip_list chaque minute
 
 
-
-
+## MAJ 30/05/2021
+```
+/add pour rajouter des ip dans request_body en forme de json au tableau backlist
+/syn pour synchroniser la list de blacklist de BD à la cache de Nginx
+/list pour renvoyer la blacklist 
+```
+Les trois urls sont strictement réservés au localhost
