@@ -22,16 +22,24 @@ if not ok then
     return
 end
 
-res, err, errcode, sqlstate =
-                    db:query("insert into ip_lists (ip, count) "
-                             .. "values (\'" .. ngx.var.real_ip .. "\', 1)"
-                             .. "ON DUPLICATE KEY UPDATE count = count + 1;")
+
+res, err, errcode, sqlstate = db:query("select ip from blacklist limit 1000;")
 if not res then
-    ngx.say("bad result: ", err, ": ", errcode, ": ", sqlstate, ".")
-    return
+	ngx.say("bad result: ", err, ": ", errcode, ": ", sqlstate, ".")
+	return
 end
 
-ngx.say(res.affected_rows, " rows inserted into table ")
+local ip_blacklist  = ngx.shared.ip_blacklist
+
+ip_blacklist:flush_all();
+for k, v in pairs(res) do
+	for k1, v1 in pairs(v) do
+		ip_blacklist:set(v1, true);
+	end
+end
+
+ngx.say("blacklist in cache is updated")
+
 
 local ok, err = db:set_keepalive(10000, 100)
 if not ok then
